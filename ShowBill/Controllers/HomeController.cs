@@ -12,7 +12,35 @@ namespace ShowBill.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = new MainModel()
+            {
+                Filter = new FilterModel(),
+                Events = new List<EventViewModel>()
+                {
+                    new EventViewModel
+                    {
+                        Photo="/images/banner1.svg",
+                        Title ="Event",
+                        Place="Place",
+                        Date="01.01.18"
+                    },
+                    new EventViewModel
+                    {
+                        Photo="/images/banner2.svg",
+                        Title ="Event",
+                        Place="Place Place Place Place Place Place Place Place",
+                        Date="01.01.18"
+                    },
+                    new EventViewModel
+                    {
+                        Photo="/images/banner3.svg",
+                        Title =" Event Event Event Event Event Event Event",
+                        Place="Place",
+                        Date="01.01.18"
+                    }
+                }
+            };
+            return View("../Main", model);
         }
 
         public IActionResult About()

@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-ShowBill-93768CE5-186E-4C61-82B3-CE1F0E22FA67</UserSecretsId>
+    <UserSecretsId>aspnet-ShowBill-DA8159BF-55F5-4EC0-A48F-21EAD034340F</UserSecretsId>
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
   </ItemGroup>
@@ -16,6 +17,10 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShowBill.Data\ShowBill.Data.csproj" />
   </ItemGroup>
 
 </Project>
