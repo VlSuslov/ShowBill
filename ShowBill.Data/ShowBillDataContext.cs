@@ -15,15 +15,16 @@ namespace ShowBill.Data
         public DbSet<Date> Dates { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Place> Places { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
-        public ShowBillDataContext()
-        {
-            Database.EnsureCreated();
-        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ShowBillDataContext(DbContextOptions<ShowBillDataContext> options)
+          : base(options)
+        { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShowBill;Trusted_Connection=True;");
+            base.OnModelCreating(builder);
         }
     }
 }
