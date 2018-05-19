@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ShowBill.Data;
 
-namespace ShowBill.Data
+namespace ShowBill.Logic
 {
-   public class ShowBillDataContext : DbContext
+    public class ShowBillDbContext : DbContext
     {
         public DbSet<Concert> Concerts { get; set; }
         public DbSet<Movie> Movies { get; set; }
@@ -17,10 +15,10 @@ namespace ShowBill.Data
         public DbSet<Place> Places { get; set; }
         public DbSet<Photo> Photos { get; set; }
 
-
-        public ShowBillDataContext(DbContextOptions<ShowBillDataContext> options)
+        public ShowBillDbContext(DbContextOptions<ShowBillDbContext> options)
           : base(options)
-        { }
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

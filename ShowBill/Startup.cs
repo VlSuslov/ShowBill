@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShowBill.Data;
 using ShowBill.Models;
 using ShowBill.Services;
+using ShowBill.Logic;
 
 namespace ShowBill
 {
@@ -26,7 +27,7 @@ namespace ShowBill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ShowBillDataContext>(options =>
+            services.AddDbContext<ShowBillDbContext>(options =>
                 options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShowBill;Trusted_Connection=True;"));
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -35,6 +36,8 @@ namespace ShowBill
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<IShowBillUnitOfWork, ShowBillUnitOfWork>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();

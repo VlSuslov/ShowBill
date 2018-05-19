@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill", "ShowBill\ShowBill.csproj", "{EF48E4DE-87E1-4B2B-9814-ED2627E09971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowBill.Data", "ShowBill.Data\ShowBill.Data.csproj", "{DEEBBDF0-EA19-4600-B441-093CB3344152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Data", "ShowBill.Data\ShowBill.Data.csproj", "{DEEBBDF0-EA19-4600-B441-093CB3344152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShowBill.Logic", "ShowBill.Logic\ShowBill.Logic.csproj", "{80406311-BBED-4C68-B4AC-B75238689E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DEEBBDF0-EA19-4600-B441-093CB3344152}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEEBBDF0-EA19-4600-B441-093CB3344152}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEEBBDF0-EA19-4600-B441-093CB3344152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80406311-BBED-4C68-B4AC-B75238689E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80406311-BBED-4C68-B4AC-B75238689E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80406311-BBED-4C68-B4AC-B75238689E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80406311-BBED-4C68-B4AC-B75238689E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,16 +5,15 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using ShowBill.Data;
+using ShowBill.Logic;
 using System;
 
-namespace ShowBill.Data.Migrations
+namespace ShowBill.Logic.Migrations
 {
-    [DbContext(typeof(ShowBillDataContext))]
-    [Migration("20180513132508_Initial")]
-    partial class Initial
+    [DbContext(typeof(ShowBillDbContext))]
+    partial class ShowBillDataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +22,7 @@ namespace ShowBill.Data.Migrations
 
             modelBuilder.Entity("ShowBill.Data.Concert", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Cost");
@@ -54,9 +53,9 @@ namespace ShowBill.Data.Migrations
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<int?>("MovieId");
+                    b.Property<Guid?>("MovieId");
 
-                    b.Property<int?>("SportId");
+                    b.Property<Guid?>("SportId");
 
                     b.HasKey("Id");
 
@@ -69,7 +68,7 @@ namespace ShowBill.Data.Migrations
 
             modelBuilder.Entity("ShowBill.Data.Exhibition", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Cost");
@@ -95,7 +94,7 @@ namespace ShowBill.Data.Migrations
 
             modelBuilder.Entity("ShowBill.Data.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Cost");
@@ -119,7 +118,7 @@ namespace ShowBill.Data.Migrations
 
             modelBuilder.Entity("ShowBill.Data.Performance", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Cost");
@@ -146,19 +145,19 @@ namespace ShowBill.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("MovieId");
+                    b.Property<Guid?>("MovieId");
 
-                    b.Property<int?>("MovieId1");
+                    b.Property<Guid?>("MovieId1");
 
-                    b.Property<int?>("MovieId2");
+                    b.Property<Guid?>("MovieId2");
 
-                    b.Property<int?>("MovieId3");
+                    b.Property<Guid?>("MovieId3");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("PerformanceId");
+                    b.Property<Guid?>("PerformanceId");
 
-                    b.Property<int?>("PerformanceId1");
+                    b.Property<Guid?>("PerformanceId1");
 
                     b.HasKey("Id");
 
@@ -182,15 +181,15 @@ namespace ShowBill.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ConcertId");
+                    b.Property<Guid?>("ConcertId");
 
-                    b.Property<int?>("ExhibitionId");
+                    b.Property<Guid?>("ExhibitionId");
 
-                    b.Property<int?>("MovieId");
+                    b.Property<Guid?>("MovieId");
 
-                    b.Property<int?>("PerformanceId");
+                    b.Property<Guid?>("PerformanceId");
 
-                    b.Property<int?>("SportId");
+                    b.Property<Guid?>("SportId");
 
                     b.Property<string>("Url");
 
@@ -227,7 +226,7 @@ namespace ShowBill.Data.Migrations
 
             modelBuilder.Entity("ShowBill.Data.Sport", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double?>("Cost");

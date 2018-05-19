@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ShowBill.Data\ShowBill.Data.csproj" />
+    <ProjectReference Include="..\ShowBill.Logic\ShowBill.Logic.csproj" />
   </ItemGroup>
 
 </Project>

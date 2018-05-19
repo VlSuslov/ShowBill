@@ -1,9 +1,10 @@
-﻿
+﻿using System;
+
 namespace ShowBill.Data
 {
     public class Event
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Descriprion { get; set; }
         public Place Place { get; set; }

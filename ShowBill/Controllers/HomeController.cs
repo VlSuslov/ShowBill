@@ -5,14 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShowBill.Data;
+using ShowBill.Logic;
 using ShowBill.Models;
 
 namespace ShowBill.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IShowBillUnitOfWork uoW;
+
+        public HomeController(IShowBillUnitOfWork uoW)
+        {
+            this.uoW = uoW;
+        }
+
         public IActionResult Index()
-        {     
+        {
             var model = new MainModel()
             {
                 Filter = new FilterModel(),

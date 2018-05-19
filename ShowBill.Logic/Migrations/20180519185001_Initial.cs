@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ShowBill.Data.Migrations
+namespace ShowBill.Logic.Migrations
 {
     public partial class Initial : Migration
     {
@@ -28,8 +28,7 @@ namespace ShowBill.Data.Migrations
                 name: "Exhibitions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Cost = table.Column<double>(nullable: true),
                     Descriprion = table.Column<string>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: false),
@@ -53,8 +52,7 @@ namespace ShowBill.Data.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Cost = table.Column<double>(nullable: true),
                     Descriprion = table.Column<string>(nullable: true),
                     Director = table.Column<string>(nullable: true),
@@ -77,8 +75,7 @@ namespace ShowBill.Data.Migrations
                 name: "Performances",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Cost = table.Column<double>(nullable: true),
                     Descriprion = table.Column<string>(nullable: true),
                     Director = table.Column<string>(nullable: true),
@@ -101,8 +98,7 @@ namespace ShowBill.Data.Migrations
                 name: "Sport",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Cost = table.Column<double>(nullable: true),
                     Descriprion = table.Column<string>(nullable: true),
                     PlaceId = table.Column<int>(nullable: true),
@@ -126,13 +122,13 @@ namespace ShowBill.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MovieId = table.Column<int>(nullable: true),
-                    MovieId1 = table.Column<int>(nullable: true),
-                    MovieId2 = table.Column<int>(nullable: true),
-                    MovieId3 = table.Column<int>(nullable: true),
+                    MovieId = table.Column<Guid>(nullable: true),
+                    MovieId1 = table.Column<Guid>(nullable: true),
+                    MovieId2 = table.Column<Guid>(nullable: true),
+                    MovieId3 = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    PerformanceId = table.Column<int>(nullable: true),
-                    PerformanceId1 = table.Column<int>(nullable: true)
+                    PerformanceId = table.Column<Guid>(nullable: true),
+                    PerformanceId1 = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,8 +178,8 @@ namespace ShowBill.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateTime = table.Column<DateTime>(nullable: false),
-                    MovieId = table.Column<int>(nullable: true),
-                    SportId = table.Column<int>(nullable: true)
+                    MovieId = table.Column<Guid>(nullable: true),
+                    SportId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,8 +202,7 @@ namespace ShowBill.Data.Migrations
                 name: "Concerts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Cost = table.Column<double>(nullable: true),
                     DateId = table.Column<int>(nullable: true),
                     Descriprion = table.Column<string>(nullable: true),
@@ -238,11 +233,11 @@ namespace ShowBill.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConcertId = table.Column<int>(nullable: true),
-                    ExhibitionId = table.Column<int>(nullable: true),
-                    MovieId = table.Column<int>(nullable: true),
-                    PerformanceId = table.Column<int>(nullable: true),
-                    SportId = table.Column<int>(nullable: true),
+                    ConcertId = table.Column<Guid>(nullable: true),
+                    ExhibitionId = table.Column<Guid>(nullable: true),
+                    MovieId = table.Column<Guid>(nullable: true),
+                    PerformanceId = table.Column<Guid>(nullable: true),
+                    SportId = table.Column<Guid>(nullable: true),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
