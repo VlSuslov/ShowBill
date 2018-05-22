@@ -1,7 +1,9 @@
-﻿namespace ShowBill.Data
+﻿using System.Collections.Generic;
+
+namespace ShowBill.Data
 {
     public class Concert : Event
     {
-        public Date Date { get; set; }
+        public List<Person> Artists { get; set; }
     }
 }

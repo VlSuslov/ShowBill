@@ -11,9 +11,10 @@ using System;
 namespace ShowBill.Logic.Migrations
 {
     [DbContext(typeof(ShowBillDbContext))]
-    partial class ShowBillDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180522184850_MoveDates")]
+    partial class MoveDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

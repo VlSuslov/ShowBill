@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ShowBill.Data
 {
@@ -11,5 +12,6 @@ namespace ShowBill.Data
         public double? Cost { get; set; }
         public Photo[] Photos { get; set; }
         public int Raiting { get; set; }
+        public List<Date> Dates { get; set; }
     }
 }
