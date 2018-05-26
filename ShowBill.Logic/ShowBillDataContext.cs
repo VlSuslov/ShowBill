@@ -14,6 +14,7 @@ namespace ShowBill.Logic
         public DbSet<Person> Persons { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<TimePeriod> Time { get; set; }
 
         public ShowBillDbContext(DbContextOptions<ShowBillDbContext> options)
           : base(options)

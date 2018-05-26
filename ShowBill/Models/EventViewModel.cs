@@ -15,7 +15,8 @@ namespace ShowBill.Models
         public string Place { get; set; }
         public double? Cost { get; set; }
         public EventType Type { get; set; }
-        public string Photo { get; set; }
+        public List<string> Photos { get; set; }
         public string Date { get; set; }
+        public List<string> Seanses { get; set; }
     }
 }

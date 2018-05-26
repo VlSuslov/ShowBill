@@ -13,5 +13,7 @@ namespace ShowBill.Data
         public Photo[] Photos { get; set; }
         public int Raiting { get; set; }
         public List<Date> Dates { get; set; }
+        public TimePeriod Duration { get; set; }
+        public List<TimePeriod> Seanses { get; set; }
     }
 }
