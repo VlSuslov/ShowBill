@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShowBill.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -17,12 +16,12 @@ namespace ShowBill.Logic
             _context = context;
             _entities = context.Set<T>();
         }
-        public IEnumerable<T> Get()
+        public IQueryable<T> Get()
         {
-            return _entities.ToList();
+            return _entities.Select(p => p);
         }
 
-        public IEnumerable<T> Get(
+        public IQueryable<T> Get(
         Expression<Func<T, bool>> filter = null,
         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
         string includeProperties = null,
@@ -58,7 +57,7 @@ namespace ShowBill.Logic
                 query = query.Take(take.Value);
             }
 
-            return query.ToList();
+            return query;
         }
 
         public T FindById(int id)

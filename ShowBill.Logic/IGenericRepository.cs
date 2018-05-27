@@ -10,13 +10,13 @@ namespace ShowBill.Logic
     {
         void Create(T item);
         T FindById(int id);
-        IEnumerable<T> Get(
+        IQueryable<T> Get(
             Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
             int? take = null);
-        IEnumerable<T> Get();
+        IQueryable<T> Get();
         void Remove(T item);
         void Update(T item);
     }

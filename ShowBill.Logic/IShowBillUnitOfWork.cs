@@ -1,5 +1,6 @@
 ﻿using ShowBill.Data;
 using System;
+using System.Linq;
 
 namespace ShowBill.Logic
 {
@@ -11,6 +12,8 @@ namespace ShowBill.Logic
         IGenericRepository<Performance> PerformanceRepository { get; set; }
         IGenericRepository<Sport> SportRepository { get; set; }
         Event FindGlobally(Guid id);
+        IQueryable<Event> FilterTypes(EventType? type);
+        IQueryable<Event> GetAll();
         void Save();
     }
 }
