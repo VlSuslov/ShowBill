@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +8,11 @@ using ShowBill.Data;
 using ShowBill.Models;
 using ShowBill.Services;
 using ShowBill.Logic;
+using System.Linq;
+using System.Collections.Generic;
+using System;
+using AutoMapper;
+using ShowBill.MappingProfiles;
 
 namespace ShowBill
 {
@@ -41,8 +42,9 @@ namespace ShowBill
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddAutoMapper();
             services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
