@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShowBill.Data;
 using ShowBill.Logic;
@@ -13,49 +14,21 @@ namespace ShowBill.Controllers
     public class HomeController : Controller
     {
         private readonly IShowBillUnitOfWork uoW;
+        private readonly IMapper _mapper;
 
-        public HomeController(IShowBillUnitOfWork uoW)
+        public HomeController(IShowBillUnitOfWork uoW, IMapper mapper)
         {
             this.uoW = uoW;
+            this._mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var model = new MainModel()
-            {
-                Filter = new FilterModel(),
-                Events = new List<EventViewModel>()
-                {
-                    new EventViewModel
-                    {
-                        Photo="/images/banner1.svg",
-                        Title ="Event",
-                        Place="Place",
-                        Date="01.01.18"
-                    },
-                    new EventViewModel
-                    {
-                        Photo="/images/banner2.svg",
-                        Title ="Event",
-                        Place="Place Place Place Place Place Place Place Place",
-                        Date="01.01.18"
-                    },
-                    new EventViewModel
-                    {
-                        Photo="/images/banner3.svg",
-                        Title =" Event Event Event Event Event Event Event",
-                        Place="Place",
-                        Date="01.01.18"
-                    }
-                }
-            };
-            return View("../Main", model);
+            return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 

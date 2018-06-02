@@ -1,0 +1,47 @@
+﻿@model string
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>EventMap</h2>
+<div class="jumbotron">
+    <div id="map" style="width:100%;height:400px"></div>
+</div>
+
+@section scripts
+    {
+    <script>
+       function initMap() {
+       const events = JSON.parse('@Html.Raw(Model)');
+       const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: events[0].Position
+           });
+
+            for (let event of events) {
+              let marker =   new google.maps.Marker({
+                  position: event.Position,
+                  map: map
+                });
+
+                const info = `<div>
+                    <img style="width:200px" src="${event.Photo}" />
+                    <div>${event.Title}</div>
+                    <div>${event.Date}</div>
+                    <button onclick="goToDetails('${event.Id}')">Details</button>
+                    </div>`;
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: info
+                });
+
+                marker.addListener('click', function() {
+                 infowindow.open(map, marker);
+                });
+            }
+        };
+        function goToDetails(id) {
+         window.location.replace(`/Event/Details/${id}`);
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPGc90XeG6f7Gq42HQR_3ZJSRvZV3n32M&callback=initMap"></script>
+}

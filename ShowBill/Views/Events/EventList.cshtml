@@ -1,0 +1,87 @@
+﻿@using ShowBill.Models;
+@using ShowBill.Data;
+@model IList<EventViewModel>
+@{
+    FilterModel filter = (FilterModel)ViewData["Filter"];
+    Pagination pagination = (Pagination)ViewData["Pagination"];
+}
+<div style="width:100%; border:solid black 1px;border-radius:5px; padding:5px; margin:5px; margin-left: auto;
+  margin-right: auto;">
+    <div style="max-width:700px; margin-left: auto; margin-right: auto;">
+        <form asp-controller="Events" asp-action="GetEvents" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#list" method="post">
+            <div style="display:inline-block">
+                <label asp-for="@filter.Place"></label>
+                <input type="text" asp-for="@filter.Place" style="margin:5px" />
+            </div>
+            <div style="display:inline-block">
+                <label asp-for="@filter.Type"></label>
+                <select asp-for="@filter.Type"
+                        asp-items="Html.GetEnumSelectList<EventType>()"
+                        style="margin:5px">
+                    <option value=null></option>
+                </select>
+            </div>
+            <div style="display:inline-block">
+                <label asp-for="@filter.Date"></label>
+                <input type="date" asp-for="@filter.Date" style="margin:5px" />
+            </div>
+            <button type="submit" style="margin:5px; width:100px;" class="btn">Search</button>
+        </form>
+    </div>
+</div>
+<div id="list" style="margin-left: auto; margin-right: auto; display: flex; justify-content:center; flex-wrap: wrap;">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <div style="width:48%; display:inline-block; margin:5px; border:1px solid black;">
+            <img src=@Model[i].Photos[0] />
+            <div>
+                <div>@Model[i].Title</div>
+                <div>@Model[i].Place</div>
+                @if (Model[i].Cost != null)
+                {
+                    <div>@Model[i].Cost</div>
+                }
+                <div>@Model[i].Date</div>
+                <a class="btn btn-default" asp-controller="Events" asp-action="Details" asp-route-id=@Model[i].Id>Details</a>
+            </div>
+        </div>
+    }
+</div>
+
+<div style="display:flex;justify-content:center; align-items:center;">
+    @if (pagination.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (pagination.CurrentPage > 1)
+            {
+                <li>
+                    <a asp-controller="Events" asp-action="GetEvents" asp-route-filter=@filter asp-route-page=0>First</a>
+                </li>
+                <li>
+                    <a asp-controller="Events" asp-action="GetEvents" asp-route-filter=@filter asp-route-page=@(pagination.CurrentPage-1)>Previous</a>
+                </li>
+            }
+
+            @for (var page = pagination.StartPage; page <= pagination.EndPage; page++)
+            {
+                <li class="@(page == pagination.CurrentPage ? " active" : "" )">
+                    <a asp-controller="Event" asp-action="GetEvents" asp-route-filter=@filter asp-route-page=@(page)>@(page)</a>
+                </li>
+            }
+
+            @if (pagination.CurrentPage < pagination.TotalPages)
+            {
+                <li>
+                    <a asp-controller="Events" asp-action="GetEvents"
+                       asp-route-filter=@filter
+                       asp-route-page=@(pagination.CurrentPage + 1)>Next</a>
+                </li>
+                <li>
+                    <a asp-controller="Events" asp-action="GetEvents"
+                       asp-route-filter=@filter
+                       asp-route-page=@(pagination.TotalPages)>Last</a>
+                </li>
+            }
+        </ul>
+    }
+</div>

@@ -18,6 +18,11 @@ namespace ShowBill.MappingProfiles
                .ForMember(ev => ev.Place, m => m.MapFrom(e => e.Place.Name))
                .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
                .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)));
+
+            CreateMap<Event, EventOnMapViewModel>()
+                .ForMember(enm => enm.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+                .ForMember(enm => enm.Photo, m => m.MapFrom(e => e.Photos[0].Url))
+                .ForMember(enm => enm.Position, m => m.MapFrom(e => new Position { Lat = e.Place.Latitude, Lng = e.Place.Longitude }));
         }
 
         public EventType GetEventType(Event @event)

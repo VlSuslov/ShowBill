@@ -1,4 +1,5 @@
 ﻿using ShowBill.Data;
+using System;
 
 namespace ShowBill.Models
 {
@@ -6,6 +7,6 @@ namespace ShowBill.Models
     {
         public string Place { get; set; }
         public EventType? Type { get; set; }
-        public string Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }
