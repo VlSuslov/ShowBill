@@ -11,7 +11,7 @@ namespace ShowBill.Views.Manage
     {
         public static string ActivePageKey => "ActivePage";
 
-        public static string Index => "Index";
+        public static string Index => "Main";
 
         public static string ChangePassword => "ChangePassword";
 

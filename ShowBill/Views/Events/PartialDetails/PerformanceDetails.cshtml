@@ -1,0 +1,36 @@
+﻿@model ShowBill.Models.EventModels.PerformanceViewModel
+
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Director)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @Model.Director
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Actors)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var actor in Model.Actors)
+        {
+            <div>
+                @actor
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Authors)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var autor in Model.Authors)
+        {
+            <div>
+                @autor
+            </div>
+        }
+    </div>
+</div>

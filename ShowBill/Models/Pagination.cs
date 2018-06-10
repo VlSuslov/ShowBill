@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ShowBill.Models
 {
@@ -9,8 +7,8 @@ namespace ShowBill.Models
     {
         public Pagination(int totalItems, int? page, int pageSize = 10)
         {
-            var totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
-            var currentPage = page != null ? (int)page : 1;
+            var totalPages = (int)Math.Ceiling((double)totalItems / (double)pageSize);
+            var currentPage = page != null ? (int)page : 0;
             var startPage = currentPage - 5;
             var endPage = currentPage + 4;
             if (startPage <= 0)

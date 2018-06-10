@@ -59,7 +59,7 @@ namespace ShowBill.Logic
                 case EventType.Exhibition: return ExhibitionRepository.Get(null, includeProperties: _exhibitionsIncludes);
                 case EventType.Movie: return MovieRepository.Get(null, includeProperties: _moviesIncludes);
                 case EventType.Performance: return PerformanceRepository.Get(null, includeProperties: _performancesIncludes);
-                case EventType.Sport: return PerformanceRepository.Get(null, includeProperties: _exhibitionsIncludes);
+                case EventType.Sport: return SportRepository.Get(null, includeProperties: _sportIncludes);
                 default: return GetAll();
             }
         }

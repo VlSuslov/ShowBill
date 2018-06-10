@@ -1,9 +1,10 @@
-﻿@model List<ShowBill.Models.EventViewModel>
+﻿@model List<ShowBill.Models.EventModels.EventListItemViewModel>
+
 @namespace ShowBill.Data
 @{
     var popular = Model.Take(5).ToList();
 }
-<div class="jumbotron" style="padding-top:unset;padding-bottom:unset">
+<div class="jumbotron">
     <div id="mainEvents" class="carousel slide" data-ride="carousel" data-interval="6000">
         <ol class="carousel-indicators">
             @for (int i = 0; i < popular.Count(); i++)
@@ -24,7 +25,7 @@
                 @if (j == 0)
                 {
                     <div class="item active">
-                        <img src=@popular[j].Photos[0] alt="Microsoft Azure" class="img-responsive" />
+                        <img src=@popular[j].Photo alt="Microsoft Azure" class="img-responsive" />
                         <div class="carousel-caption" role="option">
                             <p>
                                 @popular[j].Title
@@ -38,7 +39,7 @@
                 else
                 {
                     <div class="item">
-                        <img src=@popular[j].Photos[0] alt="Microsoft Azure" class="img-responsive" />
+                        <img src=@popular[j].Photo alt="Microsoft Azure" class="img-responsive" />
                         <div class="carousel-caption" role="option">
                             <p>
                                 @popular[j].Title

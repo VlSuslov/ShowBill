@@ -1,0 +1,64 @@
+﻿@model ShowBill.Models.EventViewModels.MovieViewModel
+
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Director)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @Model.Director
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Actors) </b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var actor in Model.Actors)
+        {
+            <div>
+                @actor
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Screenwriters) </b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var screenwriter in Model.Screenwriters)
+        {
+            <div>
+                @screenwriter
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Composers)</b>
+    </div>
+    <div style="margin:5px" class="col-xs-6 inline-content">
+        @foreach (var composer in Model.Composers)
+        {
+            <div>
+                @composer
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Producers)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var producer in Model.Producers)
+        {
+            <div>
+                @producer
+            </div>
+        }
+    </div>
+</div>
+

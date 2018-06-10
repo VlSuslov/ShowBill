@@ -69,7 +69,7 @@ namespace ShowBill
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Events}/{action=Index}/{id?}");
+                    template: "{controller=Events}/{action=Main}/{id?}");
             });
         }
     }

@@ -1,0 +1,15 @@
+﻿@model ShowBill.Models.EventModels.ArtistsEventViewModel
+
+<div class="row">
+    <div class="col-xs-2">
+        <b>@Html.DisplayNameFor(model => model.Artists)</b>
+    </div>
+    <div class="col-xs-6 inline-content">
+        @foreach (var artist in Model.Artists)
+        {
+            <div>
+                @artist
+            </div>
+        }
+    </div>
+</div>

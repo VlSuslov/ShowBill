@@ -3,7 +3,7 @@ using System;
 
 namespace ShowBill.Models
 {
-    public class FilterModel
+    public class Filter
     {
         public string Place { get; set; }
         public EventType? Type { get; set; }

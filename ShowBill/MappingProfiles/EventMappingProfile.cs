@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using ShowBill.Data;
 using ShowBill.Models;
+using ShowBill.Models.EventModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ShowBill.MappingProfiles
 {
@@ -15,7 +15,6 @@ namespace ShowBill.MappingProfiles
             CreateMap<Event, EventViewModel>()
                .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
                .ForMember(ev => ev.Seanses, m => m.MapFrom(e => FormatSeanses(e.Seanses).ToList()))
-               .ForMember(ev => ev.Place, m => m.MapFrom(e => e.Place.Name))
                .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
                .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)));
 
@@ -23,6 +22,45 @@ namespace ShowBill.MappingProfiles
                 .ForMember(enm => enm.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
                 .ForMember(enm => enm.Photo, m => m.MapFrom(e => e.Photos[0].Url))
                 .ForMember(enm => enm.Position, m => m.MapFrom(e => new Position { Lat = e.Place.Latitude, Lng = e.Place.Longitude }));
+
+            CreateMap<Event, EventListItemViewModel>()
+               .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+               .ForMember(ev => ev.Place, m => m.MapFrom(e => e.Place.Name))
+               .ForMember(ev => ev.Photo, m => m.MapFrom(e => e.Photos[0].Url));
+
+            CreateMap<Movie, MovieViewModel>()
+             .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+             .ForMember(ev => ev.Seanses, m => m.MapFrom(e => FormatSeanses(e.Seanses).ToList()))
+             .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
+             .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)))
+             .ForMember(ev => ev.Actors, m => m.MapFrom(e => e.Actors.Select(p => p.Name)))
+             .ForMember(ev => ev.Director, m => m.MapFrom(e => e.Director.Name))
+             .ForMember(ev => ev.Composers, m => m.MapFrom(e => e.Composers.Select(p => p.Name)))
+             .ForMember(ev => ev.Screenwriters, m => m.MapFrom(e => e.Screenwriters.Select(p => p.Name)))
+             .ForMember(ev => ev.Producers, m => m.MapFrom(e => e.Producers.Select(p => p.Name)));
+
+            CreateMap<Performance, PerformanceViewModel>()
+             .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+             .ForMember(ev => ev.Seanses, m => m.MapFrom(e => FormatSeanses(e.Seanses).ToList()))
+             .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
+             .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)))
+             .ForMember(ev => ev.Actors, m => m.MapFrom(e => e.Actors.Select(p => p.Name)))
+             .ForMember(ev => ev.Director, m => m.MapFrom(e => e.Director.Name))
+             .ForMember(ev => ev.Authors, m => m.MapFrom(e => e.Authors.Select(p => p.Name)));
+
+            CreateMap<Exhibition, ArtistsEventViewModel>()
+             .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+             .ForMember(ev => ev.Seanses, m => m.MapFrom(e => FormatSeanses(e.Seanses).ToList()))
+             .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
+             .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)))
+             .ForMember(ev => ev.Artists, m => m.MapFrom(e => e.Artists.Select(p => p.Name)));
+
+            CreateMap<Concert, ArtistsEventViewModel>()
+            .ForMember(ev => ev.Date, m => m.MapFrom(e => FormatDate(e.Dates)))
+            .ForMember(ev => ev.Seanses, m => m.MapFrom(e => FormatSeanses(e.Seanses).ToList()))
+            .ForMember(ev => ev.Type, m => m.MapFrom(e => GetEventType(e)))
+            .ForMember(ev => ev.Photos, m => m.MapFrom(e => e.Photos.Select(p => p.Url)))
+            .ForMember(ev => ev.Artists, m => m.MapFrom(e => e.Artists.Select(p => p.Name)));
         }
 
         public EventType GetEventType(Event @event)

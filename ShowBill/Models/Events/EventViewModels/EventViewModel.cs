@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using ShowBill.Data;
+﻿using ShowBill.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ShowBill.Models
+namespace ShowBill.Models.EventModels
 {
     public class EventViewModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Descriprion { get; set; }
-        public string Place { get; set; }
+        public Place Place { get; set; }
         public double? Cost { get; set; }
         public EventType Type { get; set; }
         public int Raiting { get; set; }

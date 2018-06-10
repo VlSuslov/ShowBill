@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using ShowBill.Data;
 using ShowBill.Logic;
 using ShowBill.Models;
+using ShowBill.Models.EventModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +16,41 @@ namespace ShowBill.Controllers
         private readonly IShowBillUnitOfWork _uoW;
         private readonly IMapper _mapper;
         private readonly int _pageSize;
-        public EventsController(IShowBillUnitOfWork _uoW, IMapper mapper)
+
+        public EventsController(IShowBillUnitOfWork uoW, IMapper mapper)
         {
-            this._uoW = _uoW;
+            this._uoW = uoW;
             this._mapper = mapper;
-            this._pageSize = 5;
+            this._pageSize = 10;
         }
 
-        public IActionResult GetEvents(FilterModel filter = null, int page = 0)
+        [HttpGet]
+        [Route("Events/{eventType}")]
+        public IActionResult GetEventsByType([FromRoute]string eventType)
+        {
+            try
+            {
+                EventType type = GetType(eventType);
+                IQueryable<Event> events = _uoW.FilterTypes(type);
+                var data = events.OrderBy(e => e.Raiting).Take(_pageSize).ToList();
+                var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
+
+                ViewData["Filter"] = new Filter() { Type = type };
+                ViewData["Pagination"] = new Pagination(events.Count(), 0, _pageSize);
+
+                return View("EventList", model);
+            }
+            catch
+            {
+                return View("../Shared/Error");
+            }
+        }
+
+        [Route("Events/EventList")]
+        public IActionResult EventList(Filter filter = null, int page = 0)
         {
             if (filter == null)
-                filter = new FilterModel();
+                filter = new Filter();
             IQueryable<Event> events = _uoW.FilterTypes(filter.Type);
             if (!string.IsNullOrWhiteSpace(filter.Place))
             {
@@ -37,39 +61,70 @@ namespace ShowBill.Controllers
                 events = events.Where(p => p.Dates.Any(x => DateTime.Equals(x.DateTime.Date, filter.Date.Value.Date)));
             }
             var data = events.OrderBy(e => e.Raiting).Skip(page * _pageSize).Take(_pageSize).ToList();
-            var model = this._mapper.Map<List<Event>, List<EventViewModel>>(data);
+            var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
+
             ViewData["Filter"] = filter;
             ViewData["Pagination"] = new Pagination(events.Count(), page, _pageSize);
 
             return View("EventList", model);
         }
 
+        [Route("Events/Details/{id}")]
         public IActionResult Details(Guid id)
         {
-            var data = _uoW.FindGlobally(id);
-            var model = this._mapper.Map<Event, EventViewModel>(data);
+            var data = this._uoW.FindGlobally(id);
+            var model = ConvertEvent(data);
             return View("Details", model);
         }
+
+        [Route("Events/Map")]
         public IActionResult EventMap()
         {
             var data = this._uoW.GetAll().Where(e => e.Dates.Any(d => d.DateTime >= DateTime.Now)).ToList();
-            var model = this._mapper.Map<List<Event>, List<EventOnMapViewModel>>(data.OrderBy(e => e.Raiting).ToList());    
+            var model = this._mapper.Map<List<Event>, List<EventOnMapViewModel>>(data.OrderBy(e => e.Raiting).ToList());
             var serializedModel = JsonConvert.SerializeObject(model);
 
             return View("EventMap", serializedModel);
         }
 
-        public IActionResult Index()
+        public IActionResult Main()
         {
             var data = this._uoW.GetAll().ToList();
-            var model = this._mapper.Map<List<Event>, List<EventViewModel>>(data.OrderBy(e => e.Raiting).Take(5).ToList());
+            var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data.OrderBy(e => e.Raiting).Take(_pageSize).ToList());
 
-            ViewData["Filter"] = new FilterModel();
-            ViewData["Pagination"] = new Pagination(model.Count(), 0, 5);
+            ViewData["Filter"] = new Filter();
+            ViewData["Pagination"] = new Pagination(data.Count(), 0, _pageSize);
+
             return View("Main", model);
         }
 
-        private void Initialize()
+        private EventViewModel ConvertEvent(Event @event)
+        {
+            switch (@event)
+            {
+                case Movie m: return this._mapper.Map<Movie, MovieViewModel>(@event as Movie);
+                case Exhibition e: return this._mapper.Map<Exhibition, ArtistsEventViewModel>(@event as Exhibition);
+                case Concert c: return this._mapper.Map<Concert, ArtistsEventViewModel>(@event as Concert);
+                case Performance p: return this._mapper.Map<Performance, PerformanceViewModel>(@event as Performance);
+                case Sport s: return this._mapper.Map<Event, EventViewModel>(@event);
+                default: throw new Exception();
+            }
+        }
+
+        private EventType GetType(string type)
+        {
+            switch (type)
+            {
+                case "Movies": return EventType.Movie;
+                case "Concerts": return EventType.Concert;
+                case "Performances": return EventType.Performance;
+                case "Exhibitions": return EventType.Exhibition;
+                case "Sport": return EventType.Sport;
+                default: throw new Exception();
+            }
+        }
+
+            private void Initialize()
         {
             _uoW.ExhibitionRepository.Create(new Exhibition
             {
