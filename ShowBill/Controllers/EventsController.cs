@@ -30,17 +30,17 @@ namespace ShowBill.Controllers
         {
             try
             {
-                EventType type = GetType(eventType);
+                EventType type = GetEventCollectionType(eventType);
                 IQueryable<Event> events = _uoW.FilterTypes(type);
-                var data = events.OrderBy(e => e.Raiting).Take(_pageSize).ToList();
-                var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
+                List<Event> data = events.OrderBy(e => e.Raiting).Take(_pageSize).ToList();
+                List<EventListItemViewModel> model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
 
                 ViewData["Filter"] = new Filter() { Type = type };
                 ViewData["Pagination"] = new Pagination(events.Count(), 0, _pageSize);
 
                 return View("EventList", model);
             }
-            catch
+            catch (ArgumentException)
             {
                 return View("../Shared/Error");
             }
@@ -50,7 +50,9 @@ namespace ShowBill.Controllers
         public IActionResult EventList(Filter filter = null, int page = 0)
         {
             if (filter == null)
+            {
                 filter = new Filter();
+            }
             IQueryable<Event> events = _uoW.FilterTypes(filter.Type);
             if (!string.IsNullOrWhiteSpace(filter.Place))
             {
@@ -60,8 +62,8 @@ namespace ShowBill.Controllers
             {
                 events = events.Where(p => p.Dates.Any(x => DateTime.Equals(x.DateTime.Date, filter.Date.Value.Date)));
             }
-            var data = events.OrderBy(e => e.Raiting).Skip(page * _pageSize).Take(_pageSize).ToList();
-            var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
+            List<Event> data = events.OrderBy(e => e.Raiting).Skip(page * _pageSize).Take(_pageSize).ToList();
+            List<EventListItemViewModel> model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data);
 
             ViewData["Filter"] = filter;
             ViewData["Pagination"] = new Pagination(events.Count(), page, _pageSize);
@@ -72,25 +74,26 @@ namespace ShowBill.Controllers
         [Route("Events/Details/{id}")]
         public IActionResult Details(Guid id)
         {
-            var data = this._uoW.FindGlobally(id);
-            var model = ConvertEvent(data);
+            Event data = this._uoW.FindGlobally(id);
+            EventViewModel model = ConvertEvent(data);
+
             return View("Details", model);
         }
 
         [Route("Events/Map")]
         public IActionResult EventMap()
         {
-            var data = this._uoW.GetAll().Where(e => e.Dates.Any(d => d.DateTime >= DateTime.Now)).ToList();
-            var model = this._mapper.Map<List<Event>, List<EventOnMapViewModel>>(data.OrderBy(e => e.Raiting).ToList());
-            var serializedModel = JsonConvert.SerializeObject(model);
+            List<Event> data = this._uoW.GetAll().Where(e => e.Dates.Any(d => d.DateTime >= DateTime.Now)).ToList();
+            List<EventOnMapViewModel> model = this._mapper.Map<List<Event>, List<EventOnMapViewModel>>(data.OrderBy(e => e.Raiting).ToList());
+            string serializedModel = JsonConvert.SerializeObject(model);
 
             return View("EventMap", serializedModel);
         }
 
         public IActionResult Main()
         {
-            var data = this._uoW.GetAll().ToList();
-            var model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data.OrderBy(e => e.Raiting).Take(_pageSize).ToList());
+            List<Event> data = this._uoW.GetAll().ToList();
+            List<EventListItemViewModel> model = this._mapper.Map<List<Event>, List<EventListItemViewModel>>(data.OrderBy(e => e.Raiting).Take(_pageSize).ToList());
 
             ViewData["Filter"] = new Filter();
             ViewData["Pagination"] = new Pagination(data.Count(), 0, _pageSize);
@@ -107,11 +110,11 @@ namespace ShowBill.Controllers
                 case Concert c: return this._mapper.Map<Concert, ArtistsEventViewModel>(@event as Concert);
                 case Performance p: return this._mapper.Map<Performance, PerformanceViewModel>(@event as Performance);
                 case Sport s: return this._mapper.Map<Event, EventViewModel>(@event);
-                default: throw new Exception();
+                default: throw new ArgumentException();
             }
         }
 
-        private EventType GetType(string type)
+        private EventType GetEventCollectionType(string type)
         {
             switch (type)
             {
@@ -120,11 +123,11 @@ namespace ShowBill.Controllers
                 case "Performances": return EventType.Performance;
                 case "Exhibitions": return EventType.Exhibition;
                 case "Sport": return EventType.Sport;
-                default: throw new Exception();
+                default: throw new ArgumentException();
             }
         }
 
-            private void Initialize()
+        private void Initialize()
         {
             _uoW.ExhibitionRepository.Create(new Exhibition
             {
