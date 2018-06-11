@@ -13,10 +13,10 @@ namespace ShowBill.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IShowBillUnitOfWork uoW;
+        private readonly IEventMetaRepository uoW;
         private readonly IMapper _mapper;
 
-        public HomeController(IShowBillUnitOfWork uoW, IMapper mapper)
+        public HomeController(IEventMetaRepository uoW, IMapper mapper)
         {
             this.uoW = uoW;
             this._mapper = mapper;
