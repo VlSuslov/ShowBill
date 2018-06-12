@@ -146,11 +146,11 @@ namespace ShowBill.Controllers
                 {
                     new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     },
                       new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     }
                 },
                 Raiting = 1,
@@ -211,15 +211,15 @@ namespace ShowBill.Controllers
                 {
                     new Photo
                     {
-                        Url=@".\wwwroot\images\banner2.svg"
+                        Url="/images/banner2.svg"
                     },
                       new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     },
                        new Photo
                     {
-                        Url=@".\wwwroot\images\banner3.svg"
+                        Url="/images/banner3.svg"
                     }
                 },
                 Raiting = 2,
@@ -260,11 +260,11 @@ namespace ShowBill.Controllers
                 {
                     new Photo
                     {
-                        Url=@".\wwwroot\images\banner2.svg"
+                        Url="/images/banner2.svg"
                     },
                       new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     }
                 },
                 Raiting = 4,
@@ -298,11 +298,11 @@ namespace ShowBill.Controllers
                 {
                     new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     },
                       new Photo
                     {
-                        Url=@".\wwwroot\images\banner1.svg"
+                        Url="/images/banner1.svg"
                     }
                 },
                 Raiting = 4,
@@ -378,11 +378,11 @@ namespace ShowBill.Controllers
                 {
                     new Photo
                     {
-                        Url=@".\wwwroot\images\banner3.svg"
+                        Url="/images/banner3.svg"
                     },
                       new Photo
                     {
-                        Url=@".\wwwroot\images\banner2.svg"
+                        Url="/images/banner2.svg"
                     }
                 },
                 Raiting = 3,

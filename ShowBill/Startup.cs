@@ -61,6 +61,11 @@ namespace ShowBill
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ShowBillDbContext>();
+                context.Database.Migrate();
+            }
             app.UseStaticFiles();
 
             app.UseAuthentication();

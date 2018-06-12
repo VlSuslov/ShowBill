@@ -13,13 +13,9 @@ namespace ShowBill.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEventMetaRepository uoW;
-        private readonly IMapper _mapper;
 
-        public HomeController(IEventMetaRepository uoW, IMapper mapper)
+        public HomeController()
         {
-            this.uoW = uoW;
-            this._mapper = mapper;
         }
 
         public IActionResult Index()

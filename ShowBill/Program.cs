@@ -19,7 +19,9 @@ namespace ShowBill
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+             .UseKestrel(options => options.AddServerHeader = false)
+             .UseUrls("http://10.10.42.16:8083")
+             .UseStartup<Startup>()
+             .Build();
     }
 }
