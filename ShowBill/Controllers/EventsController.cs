@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ShowBill.Data;
-using ShowBill.Logic;
 using ShowBill.Models;
-using ShowBill.Models.EventModels;
+using ShowBill.Web.Models;
+using ShowBill.Web.Models.EventModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShowBill.Controllers
+namespace ShowBill.Web.Controllers
 {
     public class EventsController : Controller
     {
@@ -28,13 +29,15 @@ namespace ShowBill.Controllers
         public IActionResult Main()
         {
             IQueryable<Event> data = this.metaRepository.GetAll();
-            List<Event> events = data.OrderBy(e => e.Raiting).Take(_pageSize).ToList();
-            List<EventListItemViewModel> model = this.mapper.Map<List<Event>, List<EventListItemViewModel>>(events);
+            List<EventListItemViewModel> events = data.OrderBy(e => e.Raiting)
+                .Take(_pageSize)
+                .ProjectTo<EventListItemViewModel>()
+                .ToList();
 
             ViewData["Filter"] = new Filter();
             ViewData["Pagination"] = new Pagination(data.Count(), 0, _pageSize);
 
-            return View("Main", model);
+            return View("Main", events);
         }
 
         [Route("Events/EventList")]
@@ -53,13 +56,16 @@ namespace ShowBill.Controllers
             {
                 data = data.Where(p => p.Dates.Any(x => DateTime.Equals(x.DateTime.Date, filter.Date.Value.Date)));
             }
-            List<Event> events = data.OrderBy(e => e.Raiting).Skip(page * _pageSize).Take(_pageSize).ToList();
-            List<EventListItemViewModel> model = this.mapper.Map<List<Event>, List<EventListItemViewModel>>(events);
+            List<EventListItemViewModel> events = data.OrderBy(e => e.Raiting)
+                .Skip(page * _pageSize)
+                .Take(_pageSize)
+                .ProjectTo<EventListItemViewModel>()
+                .ToList();
 
             ViewData["Filter"] = filter;
             ViewData["Pagination"] = new Pagination(data.Count(), page, _pageSize);
 
-            return View("EventList", model);
+            return View("EventList", events);
         }
 
         [HttpGet]
@@ -69,14 +75,16 @@ namespace ShowBill.Controllers
             try
             {
                 EventType type = GetEventCollectionType(eventType);
-                IQueryable<Event> data = metaRepository.Get(type);
-                List<Event> events = data.OrderBy(e => e.Raiting).Take(_pageSize).ToList();
-                List<EventListItemViewModel> model = this.mapper.Map<List<Event>, List<EventListItemViewModel>>(events);
+                IQueryable<Event> data = metaRepository.Get(GetEventCollectionType(eventType));
+                List<EventListItemViewModel> events = data.OrderBy(e => e.Raiting)
+                    .Take(_pageSize)
+                    .ProjectTo<EventListItemViewModel>()
+                    .ToList();
 
                 ViewData["Filter"] = new Filter() { Type = type };
                 ViewData["Pagination"] = new Pagination(data.Count(), 0, _pageSize);
 
-                return View("EventList", model);
+                return View("EventList", events);
             }
             catch (ArgumentException)
             {
@@ -87,8 +95,8 @@ namespace ShowBill.Controllers
         [Route("Events/Details/{id}")]
         public IActionResult Details(Guid id)
         {
-            Event data = this.metaRepository.FindById(id);
-            EventViewModel model = ConvertEvent(data);
+            Event @event = this.metaRepository.FindById(id);
+            EventViewModel model = ConvertEvent(@event);
 
             return View("Details", model);
         }
@@ -96,9 +104,13 @@ namespace ShowBill.Controllers
         [Route("Events/Map")]
         public IActionResult EventMap()
         {
-            IQueryable<Event> events = this.metaRepository.GetAll().Where(e => e.Dates.Any(d => d.DateTime >= DateTime.Now)).OrderBy(e => e.Raiting);
-            List<EventOnMapViewModel> model = this.mapper.Map<List<Event>, List<EventOnMapViewModel>>(events.ToList());
-            string serializedModel = JsonConvert.SerializeObject(model);
+            var events = this.metaRepository.GetAll()
+                .Where(e => e.Dates.Any(d => d.DateTime >= DateTime.Now))
+                .OrderBy(e => e.Raiting)
+                .ProjectTo<EventOnMapViewModel>()
+                .ToList();
+
+            string serializedModel = JsonConvert.SerializeObject(events);
 
             return View("EventMap", serializedModel);
         }

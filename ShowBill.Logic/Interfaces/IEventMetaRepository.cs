@@ -1,8 +1,8 @@
-﻿using ShowBill.Data;
+﻿using ShowBill.Models;
 using System;
 using System.Linq;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public interface IEventMetaRepository
     {

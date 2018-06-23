@@ -1,7 +1,7 @@
-﻿using ShowBill.Data;
+﻿using ShowBill.Models;
 using System;
 
-namespace ShowBill.Models
+namespace ShowBill.Web.Models
 {
     public class Filter
     {

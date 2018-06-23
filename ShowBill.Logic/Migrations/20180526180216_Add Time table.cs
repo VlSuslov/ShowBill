@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ShowBill.Logic.Migrations
+namespace ShowBill.Data.Migrations
 {
     public partial class AddTimetable : Migration
     {

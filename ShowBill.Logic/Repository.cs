@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShowBill.Data;
+using ShowBill.Models;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public class Repository<T> : IGenericRepository<T> where T : Event
     {
@@ -81,4 +81,3 @@ namespace ShowBill.Logic
         }
     }
 }
-

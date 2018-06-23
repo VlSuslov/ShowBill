@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShowBill.Models.EventModels
+namespace ShowBill.Web.Models.EventModels
 {
     public class PerformanceViewModel: EventViewModel
     {

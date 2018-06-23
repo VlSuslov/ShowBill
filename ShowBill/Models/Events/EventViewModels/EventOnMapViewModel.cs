@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShowBill.Models.EventModels
+namespace ShowBill.Web.Models.EventModels
 {
     public class EventOnMapViewModel
     {
@@ -9,6 +9,6 @@ namespace ShowBill.Models.EventModels
         public Position Position { get; set; }
         public string Photo { get; set; }
         public string Date { get; set; }
-        public string Duration { get; set; }
+       // public string Duration { get; set; }
     }
 }

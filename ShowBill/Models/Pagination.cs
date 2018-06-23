@@ -1,7 +1,6 @@
 ﻿using System;
 
-
-namespace ShowBill.Models
+namespace ShowBill.Web.Models
 {
     public class Pagination
     {

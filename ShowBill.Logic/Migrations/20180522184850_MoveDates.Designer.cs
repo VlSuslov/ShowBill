@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using ShowBill.Logic;
+using ShowBill.Data;
 using System;
 
-namespace ShowBill.Logic.Migrations
+namespace ShowBill.Data.Migrations
 {
     [DbContext(typeof(ShowBillDbContext))]
     [Migration("20180522184850_MoveDates")]
@@ -21,7 +21,7 @@ namespace ShowBill.Logic.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ShowBill.Data.Concert", b =>
+            modelBuilder.Entity("ShowBill.Models.Concert", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -43,7 +43,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Concerts");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Date", b =>
+            modelBuilder.Entity("ShowBill.Models.Date", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -75,7 +75,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Dates");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Exhibition", b =>
+            modelBuilder.Entity("ShowBill.Models.Exhibition", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -97,7 +97,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Exhibitions");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Movie", b =>
+            modelBuilder.Entity("ShowBill.Models.Movie", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -123,7 +123,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Performance", b =>
+            modelBuilder.Entity("ShowBill.Models.Performance", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -149,7 +149,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Performances");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Person", b =>
+            modelBuilder.Entity("ShowBill.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -193,7 +193,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Photo", b =>
+            modelBuilder.Entity("ShowBill.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -225,7 +225,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Place", b =>
+            modelBuilder.Entity("ShowBill.Models.Place", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -241,7 +241,7 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Places");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Sport", b =>
+            modelBuilder.Entity("ShowBill.Models.Sport", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -263,126 +263,126 @@ namespace ShowBill.Logic.Migrations
                     b.ToTable("Sport");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Concert", b =>
+            modelBuilder.Entity("ShowBill.Models.Concert", b =>
                 {
-                    b.HasOne("ShowBill.Data.Place", "Place")
+                    b.HasOne("ShowBill.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Date", b =>
+            modelBuilder.Entity("ShowBill.Models.Date", b =>
                 {
-                    b.HasOne("ShowBill.Data.Concert")
+                    b.HasOne("ShowBill.Models.Concert")
                         .WithMany("Dates")
                         .HasForeignKey("ConcertId");
 
-                    b.HasOne("ShowBill.Data.Exhibition")
+                    b.HasOne("ShowBill.Models.Exhibition")
                         .WithMany("Dates")
                         .HasForeignKey("ExhibitionId");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Dates")
                         .HasForeignKey("MovieId");
 
-                    b.HasOne("ShowBill.Data.Performance")
+                    b.HasOne("ShowBill.Models.Performance")
                         .WithMany("Dates")
                         .HasForeignKey("PerformanceId");
 
-                    b.HasOne("ShowBill.Data.Sport")
+                    b.HasOne("ShowBill.Models.Sport")
                         .WithMany("Dates")
                         .HasForeignKey("SportId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Exhibition", b =>
+            modelBuilder.Entity("ShowBill.Models.Exhibition", b =>
                 {
-                    b.HasOne("ShowBill.Data.Place", "Place")
+                    b.HasOne("ShowBill.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Movie", b =>
+            modelBuilder.Entity("ShowBill.Models.Movie", b =>
                 {
-                    b.HasOne("ShowBill.Data.Person", "Director")
+                    b.HasOne("ShowBill.Models.Person", "Director")
                         .WithMany()
                         .HasForeignKey("DirectorId");
 
-                    b.HasOne("ShowBill.Data.Place", "Place")
+                    b.HasOne("ShowBill.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Performance", b =>
+            modelBuilder.Entity("ShowBill.Models.Performance", b =>
                 {
-                    b.HasOne("ShowBill.Data.Person", "Director")
+                    b.HasOne("ShowBill.Models.Person", "Director")
                         .WithMany()
                         .HasForeignKey("DirectorId");
 
-                    b.HasOne("ShowBill.Data.Place", "Place")
+                    b.HasOne("ShowBill.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Person", b =>
+            modelBuilder.Entity("ShowBill.Models.Person", b =>
                 {
-                    b.HasOne("ShowBill.Data.Concert")
+                    b.HasOne("ShowBill.Models.Concert")
                         .WithMany("Artists")
                         .HasForeignKey("ConcertId");
 
-                    b.HasOne("ShowBill.Data.Exhibition")
+                    b.HasOne("ShowBill.Models.Exhibition")
                         .WithMany("Artists")
                         .HasForeignKey("ExhibitionId");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Actors")
                         .HasForeignKey("MovieId");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Composers")
                         .HasForeignKey("MovieId1");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Producers")
                         .HasForeignKey("MovieId2");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Screenwriters")
                         .HasForeignKey("MovieId3");
 
-                    b.HasOne("ShowBill.Data.Performance")
+                    b.HasOne("ShowBill.Models.Performance")
                         .WithMany("Actors")
                         .HasForeignKey("PerformanceId");
 
-                    b.HasOne("ShowBill.Data.Performance")
+                    b.HasOne("ShowBill.Models.Performance")
                         .WithMany("Authors")
                         .HasForeignKey("PerformanceId1");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Photo", b =>
+            modelBuilder.Entity("ShowBill.Models.Photo", b =>
                 {
-                    b.HasOne("ShowBill.Data.Concert")
+                    b.HasOne("ShowBill.Models.Concert")
                         .WithMany("Photos")
                         .HasForeignKey("ConcertId");
 
-                    b.HasOne("ShowBill.Data.Exhibition")
+                    b.HasOne("ShowBill.Models.Exhibition")
                         .WithMany("Photos")
                         .HasForeignKey("ExhibitionId");
 
-                    b.HasOne("ShowBill.Data.Movie")
+                    b.HasOne("ShowBill.Models.Movie")
                         .WithMany("Photos")
                         .HasForeignKey("MovieId");
 
-                    b.HasOne("ShowBill.Data.Performance")
+                    b.HasOne("ShowBill.Models.Performance")
                         .WithMany("Photos")
                         .HasForeignKey("PerformanceId");
 
-                    b.HasOne("ShowBill.Data.Sport")
+                    b.HasOne("ShowBill.Models.Sport")
                         .WithMany("Photos")
                         .HasForeignKey("SportId");
                 });
 
-            modelBuilder.Entity("ShowBill.Data.Sport", b =>
+            modelBuilder.Entity("ShowBill.Models.Sport", b =>
                 {
-                    b.HasOne("ShowBill.Data.Place", "Place")
+                    b.HasOne("ShowBill.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId");
                 });

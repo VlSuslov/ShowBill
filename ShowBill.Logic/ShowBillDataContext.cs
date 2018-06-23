@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShowBill.Data;
+using ShowBill.Models;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public class ShowBillDbContext : DbContext
     {

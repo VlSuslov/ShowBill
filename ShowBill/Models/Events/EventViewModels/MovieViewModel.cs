@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShowBill.Models.EventModels
+namespace ShowBill.Web.Models.EventModels
 {
     public class MovieViewModel: EventViewModel
     {

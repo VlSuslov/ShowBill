@@ -1,9 +1,9 @@
-﻿using ShowBill.Data;
+﻿using ShowBill.Models;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public interface IGenericRepository<T> where T : Event
     {

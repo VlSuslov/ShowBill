@@ -1,9 +1,9 @@
-﻿using ShowBill.Data;
+﻿using ShowBill.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public class EventMetaRepository : IEventMetaRepository
     {
@@ -13,7 +13,6 @@ namespace ShowBill.Logic
         private readonly string _performancesIncludes = "Place,Photos,Dates,Duration,Seanses,Actors,Director,Authors";
         private readonly string _sportIncludes = "Place,Photos,Dates,Duration,Seanses";
         private readonly string _exhibitionsIncludes = "Place,Photos,Dates,Duration,Seanses,Artists";
-
 
         public EventMetaRepository(ShowBillDbContext dbContext)
         {

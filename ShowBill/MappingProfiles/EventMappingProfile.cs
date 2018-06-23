@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using ShowBill.Data;
+using ShowBill.Web.Models;
 using ShowBill.Models;
-using ShowBill.Models.EventModels;
+using ShowBill.Web.Models.EventModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShowBill.MappingProfiles
+namespace ShowBill.Web.MappingProfiles
 {
     public class EventMappingProfile : Profile
     {
@@ -72,11 +72,11 @@ namespace ShowBill.MappingProfiles
                 case Concert c: return EventType.Concert;
                 case Performance p: return EventType.Performance;
                 case Sport s: return EventType.Sport;
-                default: throw new Exception();
+                default: throw new ArgumentException();
             }
         }
 
-        public string FormatDate(List<Date> dates)
+        public string FormatDate(IList<Date> dates)
         {
             switch (dates.Count())
             {
@@ -87,7 +87,7 @@ namespace ShowBill.MappingProfiles
             }
         }
 
-        public List<string> FormatSeanses(List<TimePeriod> times)
+        public List<string> FormatSeanses(IList<TimePeriod> times)
         {
             return times.Count() > 0 ? times.Select(x => x.Time.ToString(@"hh\:mm")).ToList() : null;
         }

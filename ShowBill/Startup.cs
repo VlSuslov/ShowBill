@@ -1,20 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShowBill.Data;
-using ShowBill.Models;
-using ShowBill.Services;
-using ShowBill.Logic;
-using System.Linq;
-using System.Collections.Generic;
-using System;
 using AutoMapper;
-using ShowBill.MappingProfiles;
 
-namespace ShowBill
+namespace ShowBill.Web
 {
     public class Startup
     {
@@ -29,22 +21,13 @@ namespace ShowBill
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ShowBillDbContext>(options =>
-                options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShowBill;Trusted_Connection=True;"));
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                options.UseSqlServer(Configuration.GetConnectionString("EventsDbConnection")));
 
             services.AddScoped<IShowBillUnitOfWork, ShowBillUnitOfWork>();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddAutoMapper();
             services.AddMvc();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

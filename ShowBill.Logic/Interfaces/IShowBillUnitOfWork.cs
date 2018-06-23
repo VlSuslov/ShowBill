@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShowBill.Logic
+namespace ShowBill.Data
 {
     public interface IShowBillUnitOfWork: IDisposable
     {

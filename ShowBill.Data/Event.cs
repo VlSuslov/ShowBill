@@ -1,20 +1,19 @@
-﻿using ShowBill.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ShowBill.Web.Models.EventModels
+namespace ShowBill.Models
 {
-    public class EventViewModel
+    public class Event
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Descriprion { get; set; }
         public Place Place { get; set; }
         public double? Cost { get; set; }
-        public EventType Type { get; set; }
+        public IList<Photo> Photos { get; set; }
         public int Raiting { get; set; }
-        public List<string> Photos { get; set; }
-        public string Date { get; set; }
-        public List<string> Seanses { get; set; }
+        public IList<Date> Dates { get; set; }
+        public TimePeriod Duration { get; set; }
+        public IList<TimePeriod> Seanses { get; set; }
     }
 }

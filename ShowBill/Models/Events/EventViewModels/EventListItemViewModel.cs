@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShowBill.Models.EventModels
+namespace ShowBill.Web.Models.EventModels
 {
     public class EventListItemViewModel
     {
