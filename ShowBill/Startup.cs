@@ -47,18 +47,23 @@ namespace ShowBill.Web
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ShowBillDbContext>();
+                if (env.IsDevelopment())
+                {
+                    ShowBillDbInitializer.Initialize(context);
+                }
                 context.Database.Migrate();
+
+                app.UseStaticFiles();
+
+                app.UseAuthentication();
+
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Events}/{action=Main}/{id?}");
+                });
             }
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Events}/{action=Main}/{id?}");
-            });
         }
     }
 }
