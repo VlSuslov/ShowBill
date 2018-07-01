@@ -15,7 +15,7 @@
 <div class="jumbotron unset-paddings">
     <div>
         <hr />
-        @Html.Partial("PhotosCarousel", Model.Photos)
+        <partial name="PhotosCarousel" for="Photos"/>
         <div class="container inline-content">
             <div class="row">
                 <div class="col-xs-12">
@@ -75,22 +75,22 @@
             {
                 case EventType.Concert:
                     {
-                        @Html.Partial(@".\PartialDetails\ArtistsEventDetails", Model as ArtistsEventViewModel)
+                        <partial name=".\PartialDetails\ArtistsEventDetails" model='(Model as ArtistsEventViewModel)' />
                         break;
                     };
                 case EventType.Exhibition:
                     {
-                        @Html.Partial(@".\PartialDetails\ArtistsEventDetails", Model as ArtistsEventViewModel)
+                        <partial name=".\PartialDetails\ArtistsEventDetails" model='(Model as ArtistsEventViewModel)' />
                         break;
                     };
                 case EventType.Performance:
                     {
-                        @Html.Partial(@".\PartialDetails\PerformanceDetails", Model as PerformanceViewModel)
+                        <partial name=".\PartialDetails\PerformanceDetails" model='(Model as PerformanceViewModel)' />
                         break;
                     };
                 case EventType.Movie:
                     {
-                        @Html.Partial(@".\PartialDetails\MovieDetails", Model as MovieViewModel)
+                        <partial name=".\PartialDetails\MovieDetails" model='(Model as MovieViewModel)' />
                         break;
                     };
                 default: { break; };

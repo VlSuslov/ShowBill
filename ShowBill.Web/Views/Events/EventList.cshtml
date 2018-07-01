@@ -53,7 +53,8 @@
             </div>
         }
     </div>
-    @Html.Partial("Pagination", (Pagination)ViewData["Pagination"])
+    <partial name="Pagination" model='(Pagination)ViewData["Pagination"]'/>
+    MovieViewModel
 </div>
 
 

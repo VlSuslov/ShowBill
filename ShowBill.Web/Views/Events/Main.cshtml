@@ -5,7 +5,7 @@
     var popular = Model.Take(5).ToList();
 }
 <div class="jumbotron">
-    @Html.Partial("MostPopularCarousel", popular)
-    @Html.Partial("EventList", Model)
+    <partial name="MostPopularCarousel" model='popular' />
+    <partial name="EventList" model='Model'/>
 </div>
 
