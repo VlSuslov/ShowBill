@@ -26,6 +26,7 @@ namespace ShowBill.Web.Controllers
             this.mapper = mapper;
             this._pageSize = 10;
         }
+
         public IActionResult Main()
         {
             IQueryable<Event> data = this.metaRepository.GetAll();

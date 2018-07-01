@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShowBill.Data\ShowBill.Models.csproj" />
-    <ProjectReference Include="..\ShowBill.Logic\ShowBill.Data.csproj" />
+    <ProjectReference Include="..\ShowBill.Models\ShowBill.Models.csproj" />
+    <ProjectReference Include="..\ShowBill.Data\ShowBill.Data.csproj" />
   </ItemGroup>
 
 </Project>

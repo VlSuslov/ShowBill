@@ -9,6 +9,5 @@ namespace ShowBill.Web.Models.EventModels
         public Position Position { get; set; }
         public string Photo { get; set; }
         public string Date { get; set; }
-       // public string Duration { get; set; }
     }
 }

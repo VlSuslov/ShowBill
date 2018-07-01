@@ -7,7 +7,7 @@ namespace ShowBill.Data
 {
     public class EventMetaRepository : IEventMetaRepository
     {
-        private readonly ShowBillDbContext _context;
+        private ShowBillDbContext context;
         private readonly string _concertsIncludes = "Place,Photos,Dates,Duration,Seanses,Artists";
         private readonly string _moviesIncludes = "Place,Photos,Dates,Duration,Seanses,Actors,Director,Composers,Screenwriters,Producers";
         private readonly string _performancesIncludes = "Place,Photos,Dates,Duration,Seanses,Actors,Director,Authors";
@@ -16,12 +16,12 @@ namespace ShowBill.Data
 
         public EventMetaRepository(ShowBillDbContext dbContext)
         {
-            _context = dbContext;
-            ConcertRepository = new Repository<Concert>(_context);
-            ExhibitionRepository = new Repository<Exhibition>(_context);
-            MovieRepository = new Repository<Movie>(_context);
-            PerformanceRepository = new Repository<Performance>(_context);
-            SportRepository = new Repository<Sport>(_context);
+            context = dbContext;
+            ConcertRepository = new Repository<Concert>(context);
+            ExhibitionRepository = new Repository<Exhibition>(context);
+            MovieRepository = new Repository<Movie>(context);
+            PerformanceRepository = new Repository<Performance>(context);
+            SportRepository = new Repository<Sport>(context);
         }
 
         public IGenericRepository<Concert> ConcertRepository { get; }

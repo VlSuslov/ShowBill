@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Web", "ShowBill\ShowBill.Web.csproj", "{EF48E4DE-87E1-4B2B-9814-ED2627E09971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Web", "ShowBill.Web\ShowBill.Web.csproj", "{EF48E4DE-87E1-4B2B-9814-ED2627E09971}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Models", "ShowBill.Data\ShowBill.Models.csproj", "{DEEBBDF0-EA19-4600-B441-093CB3344152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Models", "ShowBill.Models\ShowBill.Models.csproj", "{DEEBBDF0-EA19-4600-B441-093CB3344152}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Data", "ShowBill.Logic\ShowBill.Data.csproj", "{80406311-BBED-4C68-B4AC-B75238689E96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShowBill.Data", "ShowBill.Data\ShowBill.Data.csproj", "{80406311-BBED-4C68-B4AC-B75238689E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
